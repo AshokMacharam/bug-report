@@ -1,0 +1,53 @@
+project:
+projectid:long 12133 pk
+projectname:string
+
+API:
+getallprojects:
+
+
+
+employee:
+employeeid: long string
+employeename:
+role:
+projectid: fk
+activestatus:
+
+
+API:
+add
+update:
+get:
+getemployeebyrole:
+getallemployeeinaproject
+
+
+
+
+
+bug:
+bugid:
+bugtitle:
+bug desc:
+assignedTo: fk empid
+assignedBy: fk
+createdtime:
+updatedtime:
+project: fk projectid
+os:
+type:
+browser:
+priority:
+severity:
+
+
+API:
+getallbugsina project
+getallbugsbyassignedto/assignedby
+
+
+
+
+
+
