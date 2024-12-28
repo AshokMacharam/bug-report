@@ -2,69 +2,94 @@ package com.bug.report.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class Employee {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long employeeId;
-	private String employeeName;
-	private Role role;
-	@ManyToOne
-    @JoinColumn(name = "project_code")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long employeeId;
+
+    private String employeeName;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @ManyToOne
+    @JoinColumn(name = "project_code", referencedColumnName = "project_code", nullable = false)
     private ProjectInfo projectInfo;
-	private boolean deleteFlag;
-	@OneToMany(mappedBy = "assignedTo", cascade = CascadeType.ALL)
+
+    @JsonIgnore
+    private boolean deleteFlag;
+
+    @OneToMany(mappedBy = "assignedTo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<BugInfo> assignedBugs;
 
-    @OneToMany(mappedBy = "assignedBy", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "assignedBy", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<BugInfo> reportedBugs;
-	
-	public Long getEmployeeId() {
-		return employeeId;
-	}
-	public void setEmployeeId(Long employeeId) {
-		this.employeeId = employeeId;
-	}
-	public String getEmployeeName() {
-		return employeeName;
-	}
-	public void setEmployeeName(String employeeName) {
-		this.employeeName = employeeName;
-	}
-	public Role getRole() {
-		return role;
-	}
-	public void setRole(Role role) {
-		this.role = role;
-	}
-	
 
-	public ProjectInfo getProjectInfo() {
-		return projectInfo;
-	}
-	public void setProjectInfo(ProjectInfo projectInfo) {
-		this.projectInfo = projectInfo;
-	}
-	public boolean isDeleteFlag() {
-		return deleteFlag;
-	}
+    // Getters and Setters
+    public Long getEmployeeId() {
+        return employeeId;
+    }
 
-	public void setDeleteFlag(boolean deleteFlag) {
-		this.deleteFlag = deleteFlag;
-	}
-	
-	
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public ProjectInfo getProjectInfo() {
+        return projectInfo;
+    }
+
+    public void setProjectInfo(ProjectInfo projectInfo) {
+        this.projectInfo = projectInfo;
+    }
+
+    public boolean isDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(boolean deleteFlag) {
+        this.deleteFlag = deleteFlag;
+    }
+
+    public List<BugInfo> getAssignedBugs() {
+        return assignedBugs;
+    }
+
+    public void setAssignedBugs(List<BugInfo> assignedBugs) {
+        this.assignedBugs = assignedBugs;
+    }
+
+    public List<BugInfo> getReportedBugs() {
+        return reportedBugs;
+    }
+
+    public void setReportedBugs(List<BugInfo> reportedBugs) {
+        this.reportedBugs = reportedBugs;
+    }
 }
+

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bug.report.dto.BugInfoRequest;
 import com.bug.report.model.BugInfo;
 import com.bug.report.service.BugInfoService;
 
@@ -28,15 +29,15 @@ public class BugInfoController {
 	BugInfoService bugInfoService;
 	
 	@PostMapping("/addBug")
-	public BugInfo assBugInfo(@RequestBody BugInfo bugInfo) {
+	public BugInfo assBugInfo(@RequestBody BugInfoRequest bugInfoRequest) {
 		//TODO: process POST request
 		
-		return bugInfoService.addBug(bugInfo);
+		return bugInfoService.addBug(bugInfoRequest);
 	}
 	
 	@GetMapping("/getBug/{bugId}")
-	public BugInfo getBug(@PathVariable Long bigId) {
-		return bugInfoService.getBug(bigId);
+	public BugInfo getBug(@PathVariable Long bugId) {
+		return bugInfoService.getBug(bugId);
 	}
 	
 	@GetMapping("/getAllBugsAssignedTo/{employeeId}")
