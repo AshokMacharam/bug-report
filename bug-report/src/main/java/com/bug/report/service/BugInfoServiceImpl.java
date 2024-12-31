@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bug.report.dto.BugInfoRequest;
+import com.bug.report.exception.BugNotFoundException;
 import com.bug.report.model.BugInfo;
 import com.bug.report.model.Employee;
 import com.bug.report.model.ProjectInfo;
@@ -90,6 +91,55 @@ public class BugInfoServiceImpl implements BugInfoService{
 
 		return bugInfoRepository.getAllBugsInAProject(projectCode);
 	}
+
+	public BugInfo updateBug(Long bugId, BugInfoRequest bugInfoRequest) throws BugNotFoundException {
+        // Fetch the existing bug
+        BugInfo bugInfo = bugInfoRepository.findById(bugId)
+                .orElseThrow(() -> new BugNotFoundException("Bug not found with ID: " + bugId));
+
+        // Update fields only if they are not null in the request
+        if (bugInfoRequest.getBugTitle() != null) {
+            bugInfo.setBugTitle(bugInfoRequest.getBugTitle());
+        }
+        if (bugInfoRequest.getDescription() != null) {
+            bugInfo.setDescription(bugInfoRequest.getDescription());
+        }
+        if (bugInfoRequest.getAssignedTo() != null) {
+            Employee assignedTo = employeeRepository.findById(bugInfoRequest.getAssignedTo())
+                    .orElseThrow(() -> new IllegalArgumentException("AssignedTo Employee not found"));
+            bugInfo.setAssignedTo(assignedTo);
+        }
+        if (bugInfoRequest.getAssignedBy() != null) {
+            Employee assignedBy = employeeRepository.findById(bugInfoRequest.getAssignedBy())
+                    .orElseThrow(() -> new IllegalArgumentException("AssignedBy Employee not found"));
+            bugInfo.setAssignedBy(assignedBy);
+        }
+        if (bugInfoRequest.getProjectInfo() != null) {
+            ProjectInfo projectInfo = projectRepository.findById(bugInfoRequest.getProjectInfo())
+                    .orElseThrow(() -> new IllegalArgumentException("Project not found"));
+            bugInfo.setProjectInfo(projectInfo);
+        }
+        if (bugInfoRequest.getOs() != null) {
+            bugInfo.setOs(bugInfoRequest.getOs());
+        }
+        if (bugInfoRequest.getType() != null) {
+            bugInfo.setType(bugInfoRequest.getType());
+        }
+        if (bugInfoRequest.getBrowser() != null) {
+            bugInfo.setBrowser(bugInfoRequest.getBrowser());
+        }
+        if (bugInfoRequest.getPriority() != null) {
+            bugInfo.setPriority(bugInfoRequest.getPriority());
+        }
+        if (bugInfoRequest.getSeverity() != null) {
+            bugInfo.setSeverity(bugInfoRequest.getSeverity());
+        }
+
+        // Update the last updated time
+        bugInfo.setLastUpdatedTime(java.time.LocalDateTime.now().toString());
+
+        return bugInfoRepository.save(bugInfo);
+    }
 	
 	
 

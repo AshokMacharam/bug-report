@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bug.report.dto.EmployeeRequest;
+import com.bug.report.exception.EmployeeNotFoundException;
 import com.bug.report.model.Employee;
 import com.bug.report.service.EmployeeService;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,21 +35,22 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/getEmployee/{employeeId}")
-	public Employee getEmployee(@PathVariable Long employeeId) {
+	public Employee getEmployee(@PathVariable Long employeeId) throws EmployeeNotFoundException {
 		return employeeService.getEmployee(employeeId);
 	}
 	
-	@PutMapping("updateEmployee/{id}")
-	public String putMethodName(@PathVariable String id, @RequestBody String entity) {
+	@PutMapping("updateEmployee/{employeeId}")
+	public Employee putMethodName(@PathVariable Long employeeId, @RequestBody EmployeeRequest employee) throws EmployeeNotFoundException {
 		//TODO: process PUT request
 		
-		return entity;
+		return employeeService.updateEmployee(employeeId, employee);
 	}
+	
+	
 	
 	@GetMapping("/getAllEmployeeInProject/{projectCode}")
 	public List<Employee> getAllEmployeeInProject(@PathVariable Long projectCode) {
 		return employeeService.getAllEmployeesInAProject(projectCode);
-	}
-	
+	}	
 
 }

@@ -4,8 +4,8 @@ public class EmployeeRequest {
 	
 	private Long employeeId;
 	private String employeeName;
-	private int role; // Enum ordinal
-//	private boolean deleteFlag;
+	private int role; 
+	private String password;
 	private Long projectCode;
 
 	public Long getEmployeeId() {
@@ -32,13 +32,13 @@ public class EmployeeRequest {
 		this.role = role;
 	}
 
-//	public boolean isDeleteFlag() {
-//		return deleteFlag;
-//	}
-//
-//	public void setDeleteFlag(boolean deleteFlag) {
-//		this.deleteFlag = deleteFlag;
-//	}
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public Long getProjectCode() {
 		return projectCode;

@@ -26,6 +26,9 @@ public class Employee {
 
     @JsonIgnore
     private boolean deleteFlag;
+    
+    @JsonIgnore
+    private String hashedPassword;
 
     @OneToMany(mappedBy = "assignedTo", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
@@ -60,7 +63,15 @@ public class Employee {
         this.role = role;
     }
 
-    public ProjectInfo getProjectInfo() {
+    public String getHashedPassword() {
+		return hashedPassword;
+	}
+
+	public void setHashedPassword(String password) {
+		this.hashedPassword = password;
+	}
+
+	public ProjectInfo getProjectInfo() {
         return projectInfo;
     }
 

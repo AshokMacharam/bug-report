@@ -46,7 +46,9 @@ API:
 getallbugsina project
 getallbugsbyassignedto/assignedby
 
-
+login 
+empid
+password
 
 
 

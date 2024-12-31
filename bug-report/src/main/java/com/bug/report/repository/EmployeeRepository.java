@@ -13,11 +13,12 @@ import com.bug.report.model.Role;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	
-	@Query("SELECT e FROM Employee e WHERE e.role = :role")
+	@Query("SELECT e FROM Employee e WHERE e.role = :role AND e.deleteFlag = false")
     List<Employee> getEmployeesByRole(@Param("role") Role role);
 
 	//@Query("SELECT e FROM Employee e WHERE e.projectInfo = :projectCode")
-	@Query("SELECT e FROM Employee e JOIN e.projectInfo p WHERE p.projectCode = :projectCode")
+	@Query("SELECT e FROM Employee e JOIN e.projectInfo p WHERE p.projectCode = :projectCode AND e.deleteFlag = false")
 	List<Employee> getEmployeeByProjectCode(@Param("projectCode") Long projectCode);
 
+	
 }
