@@ -45,12 +45,16 @@ public class EmployeeController {
 		
 		return employeeService.updateEmployee(employeeId, employee);
 	}
-	
-	
-	
+		
 	@GetMapping("/getAllEmployeeInProject/{projectCode}")
 	public List<Employee> getAllEmployeeInProject(@PathVariable Long projectCode) {
 		return employeeService.getAllEmployeesInAProject(projectCode);
 	}	
+	
+	@PutMapping("deleteEmployee/{employeeId}")
+	public String deleteEmployee(@PathVariable Long employeeId) {
+		
+		return employeeService.deleteEmployee(employeeId);
+	}
 
 }

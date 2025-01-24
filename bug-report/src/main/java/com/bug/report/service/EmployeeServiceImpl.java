@@ -94,7 +94,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public String deleteEmployee(Long employeeId) {
 		Employee emp = employeeRepository.findById(employeeId).get();
-		emp.setEmployeeName(emp.getEmployeeName());
+		emp.setDeleteFlag(true);
+		employeeRepository.save(emp);
 		return "Employee with id "+employeeId+" has been deleted";
 	}
 
