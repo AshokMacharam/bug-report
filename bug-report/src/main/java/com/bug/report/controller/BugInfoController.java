@@ -43,6 +43,11 @@ public class BugInfoController {
 		return bugInfoService.getBug(bugId);
 	}
 	
+	@GetMapping("/getAllBugs")
+	public List<BugInfo> getAllBug() {
+		return bugInfoService.getAllBugs();
+	}
+	
 	@GetMapping("/getAllBugsAssignedTo/{employeeId}")
 	public List<BugInfo> getAllBugsAssignedTo(@PathVariable Long employeeId) {
 		return bugInfoService.getAllBugsAssignedTo(employeeId);
