@@ -13,7 +13,8 @@ public interface EmployeeService {
 	Employee addEmployee(EmployeeRequest employee);
 	Employee getEmployee(Long employeeId) throws EmployeeNotFoundException;
 	Employee updateEmployee(Long employeeId,EmployeeRequest employee) throws EmployeeNotFoundException;
-	List<Employee> getAllEmployeesByRole(Role role);
+	List<Employee> getAllEmployeesByRole(String role);
+	List<Employee> getAllEmployees();
 	List<Employee> getAllEmployeesInAProject(Long projectCode);
 	String deleteEmployee(Long employeeNumber);
 	//List<Employee> listOfEmployeeWithSameDepartment(String departmentCode);

@@ -17,8 +17,8 @@ public class Employee {
 
     private String employeeName;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    //@Enumerated(EnumType.STRING)
+    private String role;
 
     @ManyToOne
     @JoinColumn(name = "project_code", referencedColumnName = "project_code", nullable = false)
@@ -55,11 +55,11 @@ public class Employee {
         this.employeeName = employeeName;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 

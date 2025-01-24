@@ -75,6 +75,11 @@ public class BugInfoServiceImpl implements BugInfoService{
 	}
 
 	@Override
+	public List<BugInfo> getAllBugs() {
+		return bugInfoRepository.findAll();
+	}
+	
+	@Override
 	public List<BugInfo> getAllBugsAssignedTo(Long empId) {
 		
 		return bugInfoRepository.getAllBugsAssignedTo(empId);

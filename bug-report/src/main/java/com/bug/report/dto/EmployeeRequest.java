@@ -4,7 +4,7 @@ public class EmployeeRequest {
 	
 	private Long employeeId;
 	private String employeeName;
-	private int role; 
+	private String role; 
 	private String password;
 	private Long projectCode;
 
@@ -24,11 +24,11 @@ public class EmployeeRequest {
 		this.employeeName = employeeName;
 	}
 
-	public int getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 

@@ -51,6 +51,16 @@ public class EmployeeController {
 		return employeeService.getAllEmployeesInAProject(projectCode);
 	}	
 	
+	@GetMapping("/getAllEmployees")
+	public List<Employee> getAllEmployees() {
+		return employeeService.getAllEmployees();
+	}
+	
+	@GetMapping("/getAllEmployeesByRole/{role}")
+	public List<Employee> getAllEmployees(@PathVariable String role) {
+		return employeeService.getAllEmployeesByRole(role);
+	}
+	
 	@PutMapping("deleteEmployee/{employeeId}")
 	public String deleteEmployee(@PathVariable Long employeeId) {
 		

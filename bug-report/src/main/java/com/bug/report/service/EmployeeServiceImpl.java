@@ -34,7 +34,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee employee = new Employee();
         employee.setEmployeeId(employeeRequest.getEmployeeId());
         employee.setEmployeeName(employeeRequest.getEmployeeName());
-        employee.setRole(Role.values()[employeeRequest.getRole()]); // Map ordinal to enum
+        //employee.setRole(Role.values()[employeeRequest.getRole()]); // Map ordinal to enum
+        employee.setRole(employeeRequest.getRole());
         employee.setHashedPassword(PasswordUtil.hashPassword(employeeRequest.getPassword()));
         employee.setDeleteFlag(false);
         employee.setProjectInfo(project);
@@ -64,10 +65,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		if (employeeRequest.getEmployeeName() != null) {
 	        emp.setEmployeeName(employeeRequest.getEmployeeName());
 	    }
-		if (employeeRequest.getRole() >= 0 && employeeRequest.getRole() < Role.values().length) {
-		    emp.setRole(Role.values()[employeeRequest.getRole()]);
-		} else {
-		    throw new IllegalArgumentException("Invalid role value provided: " + employeeRequest.getRole());
+//		if (employeeRequest.getRole() >= 0 && employeeRequest.getRole() < Role.values().length) {
+//		    emp.setRole(Role.values()[employeeRequest.getRole()]);
+//		} else {
+//		    throw new IllegalArgumentException("Invalid role value provided: " + employeeRequest.getRole());
+//		}
+		if(employeeRequest.getRole()!=null) {
+			emp.setRole(employeeRequest.getRole());
 		}
 		if(employeeRequest.getProjectCode() != null) {
 			ProjectInfo project = projectRepository.findById(employeeRequest.getProjectCode())
@@ -82,10 +86,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public List<Employee> getAllEmployeesByRole(Role role) {
+	public List<Employee> getAllEmployeesByRole(String role) {
 		return employeeRepository.getEmployeesByRole(role);
 	}
 
+	@Override
+	public List<Employee> getAllEmployees() {
+		return employeeRepository.getAllEmployees();
+	}
 	@Override
 	public List<Employee> getAllEmployeesInAProject(Long projectCode) {
 		return employeeRepository.getEmployeeByProjectCode(projectCode);

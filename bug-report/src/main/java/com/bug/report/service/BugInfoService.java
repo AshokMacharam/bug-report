@@ -11,6 +11,7 @@ public interface BugInfoService {
 	BugInfo addBug(BugInfoRequest bugInfoRequest);
 	BugInfo getBug(Long bugId);
 	List<BugInfo> getAllBugsAssignedTo(Long empId);
+	List<BugInfo> getAllBugs();
 	List<BugInfo> getAllBugsAssignedBy(Long empId);
 	List<BugInfo> getAllBugsInAProject(Long projectCode);
 	BugInfo updateBug(Long bugId, BugInfoRequest bugInfoRequest) throws BugNotFoundException;
